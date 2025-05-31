@@ -9,4 +9,7 @@ const DATABASE_NAME = process.env.DATABASE_NAME;
 
 module.exports = new Pool({
   connectionString: `postgresql://${DATABASE_USER}:${DATABASE_PASSWORD}@${DATABASE_HOST}/${DATABASE_NAME}`,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
