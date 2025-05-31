@@ -1,13 +1,9 @@
 const messages = require("../models/messages");
 
-function postNewMessage(req, res) {
+async function postNewMessage(req, res) {
   let text = req.body.text;
   let user = req.body.user;
-  messages.push({
-    text: text,
-    user: user,
-    added: new Date(),
-  });
+  await messages.newMessage(text, user, new Date());
   res.redirect("/");
 }
 

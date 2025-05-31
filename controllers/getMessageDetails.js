@@ -1,16 +1,11 @@
 const messages = require("../models/messages.js");
 
-const getMessageDetails = (req, res, next) => {
+const getMessageDetails = async (req, res, next) => {
   const { user } = req.params;
+  let currentUser = await messages.getMessageDetails(user);
+  console.log(currentUser);
 
-  let currentUser = null;
-  messages.forEach((message) => {
-    if (message.user.toLowerCase() === user.toLowerCase()) {
-      currentUser = message;
-    }
-  });
-
-  if (currentUser) {
+  if (currentUser && currentUser.length > 0) {
     res.render("messageDetails", { message: currentUser });
   } else next(new Error("404 no User found"));
 };

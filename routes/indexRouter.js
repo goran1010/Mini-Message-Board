@@ -10,6 +10,9 @@ indexRouter.get("/new", (req, res) => res.render("form"));
 indexRouter.post("/new", postNewMessage);
 indexRouter.get("/:user", getMessageDetails);
 
-indexRouter.get("/", (req, res) => res.render("index", { messages: messages }));
+indexRouter.get("/", async (req, res) => {
+  let allMessages = await messages.getAllMessages();
+  res.render("index", { allMessages: allMessages });
+});
 
 module.exports = indexRouter;
